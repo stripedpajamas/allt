@@ -8,7 +8,7 @@ program
   .option('-d, --decrypt <input>', 'Decrypt the specified input string')
   .option('-f, --decrypt-file <filename>', 'Decrypt the specified file')
   .option('-e, --encrypt <input>', 'Encrypt the specified input string')
-  .option('-x --encrypt-file <filename>', 'Encrypt the specified file')
+  .option('-x, --encrypt-file <filename>', 'Encrypt the specified file')
   .parse(process.argv)
 
 let processor, input, color
@@ -29,4 +29,8 @@ if (program.encrypt) {
   }
 }
 
-console.log(chalk[color](processor(input)))
+if (input) {
+  console.log(chalk[color](processor(input)))
+} else {
+  program.help()
+}
