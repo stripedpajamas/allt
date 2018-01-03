@@ -7,7 +7,7 @@
         "type": "git",
         "url": "https://github.com/stripedpajamas/allt.git"
     },
-    "version": "1.0.2",
+    "version": "1.0.3",
     "dependencies": {
         "commander": "2.12.2",
         "chalk": "2.3.0"
