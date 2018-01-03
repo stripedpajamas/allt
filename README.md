@@ -1,10 +1,17 @@
 ## allt
 
-you can use [pkg](https://npmjs.com/package/pkg) to compile into a binary
+### how to use?
 
-then it's `./allt -h`
+```
+npm i -g allt
+allt -h
+```
 
-if not compiling, just `node allt.js -h`
+if you don't want to install globally, run with npx:
 
+```
+npx allt -h
+```
 
-License: MIT
+### license
+MIT
