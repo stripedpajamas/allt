@@ -1,0 +1,18 @@
+{
+    "name": "allt",
+    "description": "cli to change letters to alt-letters",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/stripedpajamas/allt.git"
+    },
+    "version": "1.0.0",
+    "dependencies": {
+        "commander": "2.12.2",
+        "chalk": "2.3.0"
+    },
+    "devDependencies": {
+        "standard": "10.0.3"
+    },
+    "license": "MIT"
+}
