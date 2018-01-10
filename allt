@@ -20,7 +20,7 @@ const pbcopy = (data) => {
   const proc = childProcess.spawn('pbcopy')
   proc.stdin.write(data)
   proc.stdin.end()
-};
+}
 
 if (program.encrypt || program.encryptFile) {
   processor = enc
@@ -39,8 +39,8 @@ if (program.encrypt || program.encryptFile) {
 }
 
 if (input) {
-  const output = processor(input);
-  pbcopy(output);
+  const output = processor(input)
+  pbcopy(output)
   console.log(chalk[color](output))
 } else {
   program.help()
