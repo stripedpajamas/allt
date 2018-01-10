@@ -3,35 +3,29 @@
 const fs = require('fs')
 const program = require('commander')
 const chalk = require('chalk')
-const childProcess = require('child_process')
+const util = require('./src/util')
 const enc = require('./src/enc')
 const dec = require('./src/dec')
 
 program
-  .option('-d, --decrypt <input>', 'Decrypt the specified input string')
+  .option('-d, --decrypt [input]', 'Decrypt the specified input string')
   .option('-f, --decrypt-file <filename>', 'Decrypt the specified file')
-  .option('-e, --encrypt <input>', 'Encrypt the specified input string')
+  .option('-e, --encrypt [input]', 'Encrypt the specified input string')
   .option('-x, --encrypt-file <filename>', 'Encrypt the specified file')
   .parse(process.argv)
 
 let processor, input, color
 
-const pbcopy = (data) => {
-  const proc = childProcess.spawn('pbcopy')
-  proc.stdin.write(data)
-  proc.stdin.end()
-}
-
 if (program.encrypt || program.encryptFile) {
   processor = enc
-  input = program.encrypt
+  input = typeof program.encrypt === 'string' ? program.encrypt : util.paste()
   color = 'red'
   if (program.encryptFile) {
     input = fs.readFileSync(program.encryptFile, 'utf8')
   }
 } else {
   processor = dec
-  input = program.decrypt
+  input = typeof program.decrypt === 'string' ? program.decrypt : util.paste()
   color = 'cyan'
   if (program.decryptFile) {
     input = fs.readFileSync(program.decryptFile, 'utf8')
@@ -40,7 +34,7 @@ if (program.encrypt || program.encryptFile) {
 
 if (input) {
   const output = processor(input)
-  pbcopy(output)
+  util.copy(output)
   console.log(chalk[color](output))
 } else {
   program.help()
