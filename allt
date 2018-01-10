@@ -3,6 +3,7 @@
 const fs = require('fs')
 const program = require('commander')
 const chalk = require('chalk')
+const childProcess = require('child_process')
 const enc = require('./src/enc')
 const dec = require('./src/dec')
 
@@ -14,6 +15,12 @@ program
   .parse(process.argv)
 
 let processor, input, color
+
+const pbcopy = (data) => {
+  const proc = childProcess.spawn('pbcopy')
+  proc.stdin.write(data)
+  proc.stdin.end()
+}
 
 if (program.encrypt || program.encryptFile) {
   processor = enc
@@ -32,7 +39,9 @@ if (program.encrypt || program.encryptFile) {
 }
 
 if (input) {
-  console.log(chalk[color](processor(input)))
+  const output = processor(input)
+  pbcopy(output)
+  console.log(chalk[color](output))
 } else {
   program.help()
 }
